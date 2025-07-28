@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermarket Sales Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1><i class="fas fa-chart-bar"></i> Supermarket Sales Dashboard</h1>
+                <span class="date-range">2024 Analysis | Last Updated: <span id="lastUpdated">July 28, 2025 7:00 AM</span></span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn--secondary btn--sm" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn--secondary btn--sm" id="exportBtn">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="btn btn--secondary btn--sm" id="printBtn">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filters Panel -->
+    <section class="filters-section">
+        <div class="filters-container">
+            <div class="filter-group">
+                <label class="form-label">Branch</label>
+                <select id="branchFilter" class="form-control">
+                    <option value="all">All Branches</option>
+                    <option value="A">Branch A (New York)</option>
+                    <option value="B">Branch B (Los Angeles)</option>
+                    <option value="C">Branch C (Chicago)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="form-label">Product Line</label>
+                <select id="productFilter" class="form-control">
+                    <option value="all">All Products</option>
+                    <option value="Fashion Accessories">Fashion Accessories</option>
+                    <option value="Food and Beverages">Food and Beverages</option>
+                    <option value="Sports and Travel">Sports and Travel</option>
+                    <option value="Health and Beauty">Health and Beauty</option>
+                    <option value="Home and Lifestyle">Home and Lifestyle</option>
+                    <option value="Electronic Accessories">Electronic Accessories</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="form-label">Customer Type</label>
+                <select id="customerFilter" class="form-control">
+                    <option value="all">All Customers</option>
+                    <option value="member">Members</option>
+                    <option value="normal">Normal</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="form-label">Date Range</label>
+                <select id="dateFilter" class="form-control">
+                    <option value="all">Full Year 2024</option>
+                    <option value="q1">Q1 2024</option>
+                    <option value="q2">Q2 2024</option>
+                    <option value="q3">Q3 2024</option>
+                    <option value="q4">Q4 2024</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI Cards Section -->
+    <section class="kpi-section">
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-icon revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12.5%</span>
+                    </div>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="totalRevenue">$385,522.02</div>
+                    <div class="kpi-label">Total Revenue</div>
+                    <div class="kpi-subtitle">Across all branches</div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-icon profit">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+8.3%</span>
+                    </div>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="totalGrossIncome">$127,724.25</div>
+                    <div class="kpi-label">Total Gross Income</div>
+                    <div class="kpi-subtitle">Margin: 33.1%</div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-icon transactions">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="kpi-trend positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+5.7%</span>
+                    </div>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="totalTransactions">1,200</div>
+                    <div class="kpi-label">Total Transactions</div>
+                    <div class="kpi-subtitle">Avg: $321.27</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Analytics Section -->
+    <section class="analytics-section">
+        <div class="analytics-container">
+            <!-- Left Column: Branch Performance -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h3>Branch Performance</h3>
+                    <div class="panel-subtitle">Revenue by Location</div>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="branchChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Right Column: Product Line Performance -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h3>Product Line Performance</h3>
+                    <div class="panel-subtitle">Revenue by Category</div>
+                </div>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="productChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monthly Trend Section -->
+    <section class="trend-section">
+        <div class="trend-container">
+            <div class="chart-panel full-width">
+                <div class="panel-header">
+                    <h3>Monthly Sales Trends</h3>
+                    <div class="panel-subtitle">Revenue patterns throughout 2024</div>
+                </div>
+                <div class="chart-container" style="position: relative; height: 350px;">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Analytics Section -->
+    <section class="additional-analytics">
+        <div class="analytics-grid">
+            <!-- Payment Methods -->
+            <div class="chart-panel">
+                <div class="panel-header">
+                    <h3>Payment Methods</h3>
+                    <div class="panel-subtitle">Distribution by type</div>
+                </div>
+                <div class="chart-container" style="position: relative; height: 250px;">
+                    <canvas id="paymentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Customer Satisfaction -->
+            <div class="metric-panel">
+                <div class="panel-header">
+                    <h3>Customer Satisfaction</h3>
+                    <div class="panel-subtitle">Average rating across categories</div>
+                </div>
+                <div class="satisfaction-content">
+                    <div class="satisfaction-score">
+                        <div class="score-circle">
+                            <span class="score-value">6.97</span>
+                            <span class="score-max">/10</span>
+                        </div>
+                    </div>
+                    <div class="satisfaction-details">
+                        <div class="satisfaction-item">
+                            <span class="category">Sports & Travel</span>
+                            <span class="rating">7.04</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="category">Home & Lifestyle</span>
+                            <span class="rating">7.03</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="category">Food & Beverages</span>
+                            <span class="rating">6.95</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Insights -->
+            <div class="insights-panel">
+                <div class="panel-header">
+                    <h3>Key Insights</h3>
+                    <div class="panel-subtitle">Automated analysis</div>
+                </div>
+                <div class="insights-content">
+                    <div class="insight-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Branch B (Los Angeles) outperforms other branches by 15.4%</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Fashion Accessories is the top revenue-generating category</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>E-wallet is becoming the preferred payment method (35.2%)</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>November shows peak sales performance</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-star"></i>
+                        <span>Customer satisfaction averages 6.97/10 across all categories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>

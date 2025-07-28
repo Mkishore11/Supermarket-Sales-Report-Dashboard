@@ -1,0 +1,58 @@
+SUPERMARKET SALES ANALYTICS SUMMARY
+==================================================
+
+Key Metrics:
+- Total Revenue: $385,522.02
+- Total Gross Income: $127,724.25
+- Total Transactions: 1,200
+
+
+Branch Performance:
+        Total_Revenue  Transaction_Count  Gross_Income
+Branch                                                
+B           142281.48                429      46937.59
+C           123299.25                387      40463.89
+A           119941.29                384      40322.77
+
+
+Product Line Performance:
+                        Total_Revenue  Transaction_Count  Gross_Income  Avg_Rating
+Product Line                                                                      
+Fashion Accessories          67564.27                200      22172.83        6.92
+Food and Beverages           65929.88                200      21832.31        6.95
+Sports and Travel            64691.60                213      21479.12        7.04
+Health and Beauty            63679.94                213      21042.36        6.94
+Home and Lifestyle           61927.08                180      20753.12        7.03
+Electronic Accessories       61729.25                194      20444.51        6.94
+
+
+Customer Analysis:
+               Total_Revenue  Transaction_Count  Avg_Transaction  Gross_Income  Avg_Rating
+Customer Type                                                                             
+Member             194139.78                606           320.36      64615.95        7.00
+Normal             191382.24                594           322.19      63108.30        6.93
+
+
+Payment Method Analysis:
+             Total_Revenue  Transaction_Count  Gross_Income
+Payment                                                    
+Ewallet          135808.45                432      44507.44
+Cash             129171.69                371      42987.03
+Credit Card      120541.88                397      40229.78
+
+
+Monthly Trends:
+                  Total_Revenue  Transaction_Count  Gross_Income
+Month Month_Name                                                
+1     January          37576.81                109      12442.91
+2     February         25842.76                 85       8328.18
+3     March            31640.24                106      10289.62
+4     April            26444.36                 86       8863.89
+5     May              31545.66                105      10532.49
+6     June             33837.89                108      11237.96
+7     July             27134.22                 93       9146.75
+8     August           36094.59                106      12635.35
+9     September        33450.31                 97      10811.65
+10    October          36938.04                103      12297.57
+11    November         37404.94                113      12122.10
+12    December         27612.20                 89       9015.78
